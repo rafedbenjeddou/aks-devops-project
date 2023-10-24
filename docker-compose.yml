@@ -1,17 +1,20 @@
 version: '3'
+
 services:
   mysql:
     image: 'mysql:5.7'
     container_name: mysql
+    restart: unless-stopped
     environment:
       - MYSQL_ROOT_PASSWORD=root
       - MYSQL_PASSWORD=root
       - MYSQL_DATABASE=achatdb
     ports:
       - "3306:3306"
-  springboot-docker-container:
+  backend:
     ports:
       - "8089:8089"
+    restart: on-failure
     environment:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/achatdb?createDatabaseIfNotExist=true&useUnicode=true
       SPRING_DATASOURCE_USERNAME: "root"
@@ -20,6 +23,20 @@ services:
       context: "./"
     depends_on:
       - mysql
+    stdin_open: true
+    tty: true
+    volumes:
+      - .m2:/root/.m2
+
+volumes:
+  db:
+
+
+
+
+
+
+
 
 
 
