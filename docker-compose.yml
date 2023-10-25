@@ -12,6 +12,7 @@ services:
     ports:
       - "3306:3306"
   backend:
+    image: benjeddou_rafed_5arctic6-backend:latest 
     ports:
       - "8089:8089"
     restart: on-failure
@@ -19,8 +20,6 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/achatdb?createDatabaseIfNotExist=true&useUnicode=true
       SPRING_DATASOURCE_USERNAME: "root"
       SPRING_DATASOURCE_PASSWORD: "root"
-    build:
-      context: "./"
     depends_on:
       - mysql
     stdin_open: true
