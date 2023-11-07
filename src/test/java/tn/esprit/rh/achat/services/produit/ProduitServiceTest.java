@@ -32,7 +32,6 @@ public class ProduitServiceTest {
     Date dateDerniereModification = new Date(); // Set an actual date here
     Produit produit = new Produit(1L,"code1", "Libellé du produit 1", 10.0f, dateCreation, dateDerniereModification);
     Produit addProduit = new Produit(1L,"code1", "Libellé du produit 1", 10.0f, dateCreation, dateDerniereModification);
-
     List<Produit> listProduits = new ArrayList<Produit>() {
         {
             add(new Produit(1L,"code1", "Libellé du produit 1", 10.0f, dateCreation, dateDerniereModification));
@@ -57,16 +56,9 @@ public class ProduitServiceTest {
     }
     @Test
    public void testAddProduit() {
-    // Prepare a Facture object to save
-
-    // Define the behavior for the mocked repository when saving
     Mockito.when(produitRepository.save((addProduit))).thenReturn(addProduit);
-
-    // Call the addFacture method
     Produit addProduit1 = produitService.addProduit(addProduit);
-
     Mockito.verify(produitRepository).save((addProduit));
-    // Assertions to check if the returned Facture matches the expected one
     Assertions.assertEquals(addProduit, addProduit1);
 
 
