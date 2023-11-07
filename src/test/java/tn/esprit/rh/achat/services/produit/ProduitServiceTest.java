@@ -54,12 +54,20 @@ public class ProduitServiceTest {
         List<Produit> listProduits = produitService.retrieveAllProduits();
         Assertions.assertEquals(1, listProduits.size());
     }
+
     @Test
-   public void testAddProduit() {
-    Mockito.when(produitRepository.save((addProduit))).thenReturn(addProduit);
-    Produit addProduit1 = produitService.addProduit(addProduit);
-    Mockito.verify(produitRepository).save((addProduit));
-    Assertions.assertEquals(addProduit, addProduit1);
+    public void testDeleteProduit() {
+        long idProduit = 1L;
+        produitService.deleteProduit(idProduit);
+        Mockito.verify(produitRepository).deleteById(idProduit);
+    }
+    
+    @Test
+    public void testAddProduit() {
+        Mockito.when(produitRepository.save((addProduit))).thenReturn(addProduit);
+        Produit addProduit1 = produitService.addProduit(addProduit);
+        Mockito.verify(produitRepository).save((addProduit));
+        Assertions.assertEquals(addProduit, addProduit1);
 
 
 }
